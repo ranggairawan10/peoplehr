@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Thinking Organisation · Rangga Irawan Prasetyo · PeoplesHR Webinar · 18 June 2026</title>
+<meta name="description" content="A keynote on AI, organisation design, and capability portfolio management. By Rangga Irawan Prasetyo, MBA · Founder, Nusva Group.">
+<style>
+/* === FONTS === */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+/* === DESIGN TOKENS === */
+:root {
+  /* === NUSVA PEOPLE BRAND PALETTE === */
+  --nusva-dark:   #0A3D62;   /* Dark Blue  — trust, authority */
+  --nusva-teal:   #0FA3B1;   /* Teal       — growth, modernity */
+  --nusva-cyan:   #1ECAD3;   /* Cyan       — innovation, future */
+  --nusva-neutral:#F9FAFB;   /* Neutral    — light canvas */
+
+  /* Functional tokens mapped to Nusva */
+  --paper:        #FFFFFF;
+  --paper-warm:   #F0FBFC;
+  --ink:          #0A3D62;
+  --carbon:       #0D4B77;
+  --slate:        #3D7A96;
+  --mist:         #7BBDCA;
+  --edge:         #B8E4EA;
+  --edge-soft:    #DCF3F6;
+
+  --blue:         #0FA3B1;
+  --blue-deep:    #0A3D62;
+  --blue-soft:    #D0F0F3;
+  --vermillion:   #0A3D62;
+  --vermillion-soft: #E0F4F6;
+  --forest:       #1ECAD3;
+  --forest-soft:  #D5F8FA;
+  --gold:         #1ECAD3;
+  --gold-soft:    #DFFAFB;
+
+  /* Type scale */
+  --t-hero:    clamp(64px, 6.4vw, 92px);
+  --t-display: clamp(44px, 4.4vw, 64px);
+  --t-h1:      clamp(34px, 3.4vw, 48px);
+  --t-h2:      clamp(26px, 2.6vw, 36px);
+  --t-h3:      clamp(20px, 2vw, 26px);
+  --t-body:    clamp(15px, 1.5vw, 18px);
+  --t-meta:    clamp(11px, 1vw, 13px);
+  --t-tiny:    clamp(10px, 0.9vw, 11px);
+
+  /* Geometry */
+  --slide-w: 1280px;
+  --slide-h: 720px;
+  --margin:  64px;
+  --gutter:  32px;
+}
+
+/* === RESET === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-feature-settings: 'ss01', 'ss02', 'ss03';
+  background: #FFFFFF;
+  color: var(--ink);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* === DECK CONTAINER === */
+.deck {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === SLIDE STAGE (scales to viewport) === */
+.stage {
+  position: relative;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  transform-origin: center center;
+}
+
+/* === SLIDE === */
+.slide {
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  display: none;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(10,61,98,0.18), 0 2px 12px rgba(10,61,98,0.08);
+}
+.slide.active { display: block; animation: slidein 280ms ease-out; }
+
+@keyframes slidein {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Dark slides — fully white, Nusva teal as accent elements */
+.slide.dark {
+  background: #FFFFFF;
+  color: var(--ink);
+}
+.slide.dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #0A3D62 0%, #0FA3B1 55%, #1ECAD3 100%);
+  z-index: 10;
+}
+.slide.dark .meta-top,
+.slide.dark .meta-bottom { color: var(--slate); }
+.slide.dark .rule { background: var(--nusva-teal); }
+
+/* === CHROME (meta marks on each slide) === */
+.meta-top {
+  position: absolute;
+  top: 28px;
+  left: var(--margin);
+  right: var(--margin);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 500;
+}
+.meta-top .left { display: flex; align-items: center; gap: 14px; }
+.meta-top .section-tick {
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--ink);
+  vertical-align: middle;
+}
+.slide.dark .meta-top .section-tick { background: var(--nusva-teal); }
+
+.meta-bottom {
+  position: absolute;
+  bottom: 28px;
+  left: var(--margin);
+  right: var(--margin);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mist);
+  border: none;
+  text-decoration: none;
+}
+
+/* === TYPOGRAPHY === */
+.display, h1.display {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: var(--t-display);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-rendering: geometricPrecision;
+}
+.slide.dark .display { color: var(--ink); }
+
+.headline {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: var(--t-h1);
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  text-rendering: geometricPrecision;
+}
+.slide.dark .headline { color: var(--ink); }
+
+.headline em {
+  font-style: italic;
+  color: var(--blue);
+}
+.slide.dark .headline em { color: var(--nusva-teal); }
+
+.subhead {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+  font-size: var(--t-h3);
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+  color: var(--carbon);
+}
+.slide.dark .subhead { color: var(--carbon); }
+
+.body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+  font-size: var(--t-body);
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  color: var(--carbon);
+}
+.slide.dark .body { color: var(--carbon); }
+
+.label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.slide.dark .label { color: var(--nusva-teal); }
+
+.numeric {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+}
+
+.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-feature-settings: 'tnum';
+}
+
+/* === LAYOUT HELPERS === */
+.content {
+  position: absolute;
+  inset: 96px var(--margin) 72px var(--margin);
+}
+
+.rule {
+  display: block;
+  height: 1px;
+  background: var(--ink);
+  border: none;
+  margin: 0;
+}
+.rule.short { width: 36px; height: 2px; }
+
+/* === COMPONENTS === */
+.pull-quote {
+  font-family: 'Outfit', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.attribution {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+/* Source citation line at bottom of content area */
+.source {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--edge);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  color: var(--mist);
+  text-transform: uppercase;
+  line-height: 1.55;
+}
+.slide.dark .source {
+  color: var(--mist);
+  border-top-color: var(--edge);
+}
+
+/* === NAV CONTROLS (bottom-right) === */
+.nav-controls {
+  position: fixed; bottom: 20px; right: 20px;
+  display: flex; align-items: center; gap: 4px;
+  z-index: 200; opacity: 0; transition: opacity 300ms ease;
+  pointer-events: none;
+}
+.nav-controls.visible { opacity: 1; pointer-events: auto; }
+.nav-controls:hover { opacity: 1 !important; pointer-events: auto; }
+.nav-controls button {
+  background: rgba(10,61,98,0.65); backdrop-filter: blur(14px);
+  color: #FFFFFF; border: 1px solid rgba(255,255,255,0.18);
+  padding: 9px 18px; border-radius: 999px; cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background 150ms;
+}
+.nav-controls button:hover { background: rgba(10,61,98,0.90); }
+.nav-controls .counter {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  letter-spacing: 0.08em; color: rgba(255,255,255,0.75);
+  background: rgba(10,61,98,0.45); backdrop-filter: blur(14px);
+  padding: 9px 16px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+/* === MODE CONTROLS (top-right) === */
+.mode-controls {
+  position: fixed; top: 18px; right: 20px;
+  display: flex; align-items: center; gap: 6px;
+  z-index: 200; opacity: 0; transition: opacity 300ms ease;
+  pointer-events: none;
+}
+.mode-controls.visible { opacity: 1; pointer-events: auto; }
+.mode-controls:hover { opacity: 1 !important; pointer-events: auto; }
+.mode-controls button {
+  background: rgba(10,61,98,0.50); backdrop-filter: blur(14px);
+  color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.12);
+  padding: 7px 16px; border-radius: 999px; cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  transition: background 150ms;
+}
+.mode-controls button:hover { background: rgba(10,61,98,0.85); color: #FFFFFF; }
+
+/* === LOGIN GATE === */
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.gate::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #0A3D62 0%, #0FA3B1 55%, #1ECAD3 100%);
+}
+.gate.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.gate-card {
+  width: 440px;
+  padding: 52px 48px 44px;
+  position: relative;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1.5px solid var(--edge);
+  border-radius: 6px;
+  box-shadow: 0 8px 48px rgba(10,61,98,0.10), 0 2px 12px rgba(10,61,98,0.06);
+}
+.gate-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0A3D62, #0FA3B1, #1ECAD3);
+  border-radius: 6px 6px 0 0;
+}
+.gate-inner {
+  position: relative;
+  z-index: 1;
+}
+.gate-event-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nusva-teal);
+  margin-bottom: 28px;
+}
+.gate-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 8px;
+  text-rendering: geometricPrecision;
+}
+.gate-title em {
+  font-style: normal;
+  color: var(--nusva-teal);
+}
+.gate-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  color: var(--slate);
+  margin-bottom: 40px;
+  letter-spacing: 0.01em;
+}
+.gate-rule {
+  width: 36px;
+  height: 2px;
+  background: linear-gradient(90deg, #0FA3B1, #1ECAD3);
+  margin: 0 auto 36px;
+  border-radius: 2px;
+}
+.gate-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+.gate-fields input {
+  width: 100%;
+  background: var(--nusva-neutral);
+  border: 1.5px solid var(--edge);
+  border-radius: 4px;
+  padding: 13px 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 180ms, background 180ms;
+  -webkit-appearance: none;
+}
+.gate-fields input::placeholder {
+  color: var(--mist);
+  letter-spacing: 0.08em;
+  font-size: 11px;
+}
+.gate-fields input:focus {
+  border-color: var(--nusva-teal);
+  background: #FFFFFF;
+}
+.gate-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #0FA3B1 0%, #1ECAD3 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 3px;
+  padding: 14px 24px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 180ms, transform 120ms;
+  margin-top: 8px;
+}
+.gate-btn:hover { opacity: 0.88; }
+.gate-btn:active { transform: scale(0.99); }
+.gate-error {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #E53935;
+  text-transform: uppercase;
+  margin-top: 14px;
+  min-height: 16px;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.gate-error.show { opacity: 1; }
+.gate-footer {
+  margin-top: 36px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+@page {
+  size: landscape;
+  margin: 0;
+}
+
+@media print {
+  body { background: white; }
+  .gate { display: none !important; }
+  .nav-controls, .mode-controls { display: none !important; }
+  .deck { width: auto; height: auto; display: block; visibility: visible !important; }
+  .stage { transform: none !important; width: 13.333in; height: 7.5in; }
+  .slide {
+    display: block !important;
+    position: relative !important;
+    inset: auto !important;
+    width: 13.333in;
+    height: 7.5in;
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+    animation: none !important;
+  }
+  .slide.dark { background: #0A3D62 !important; }
+  .slide:last-child { page-break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- === LOGIN GATE === -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Webinar Access">
+  <div class="gate-card">
+    <div class="gate-inner">
+      <p class="gate-event-label">PeoplesHR Webinar · 18 June 2026</p>
+      <h1 class="gate-title">The <em>Thinking</em><br>Organisation</h1>
+      <p class="gate-subtitle">Rangga Irawan Prasetyo, MBA</p>
+      <div class="gate-rule"></div>
+      <div class="gate-fields">
+        <input type="text" id="gate-user" placeholder="Username" autocomplete="username" autocorrect="off" autocapitalize="none" spellcheck="false" />
+        <input type="password" id="gate-pass" placeholder="Password" autocomplete="current-password" />
+      </div>
+      <button class="gate-btn" id="gate-submit">Enter Session</button>
+      <p class="gate-error" id="gate-err">Incorrect credentials</p>
+      <p class="gate-footer">For registered participants only</p>
+    </div>
+  </div>
+</div>
+
+<div class="deck">
+  <div class="stage">
+    
+    <section class="slide dark" data-notes='&lt;p&gt;&lt;strong&gt;Opening (90 sec).&lt;/strong&gt; &quot;Selamat siang. Topik kita hari ini: bagaimana AI mengubah cara kita mendesain, mendeploy, dan mengelola manusia di dalam organisasi.&quot;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Vision statement (Patrick Winston):&lt;/strong&gt; Most organisations are spending heavily on AI but seeing no bottom-line impact. The reason is structural, and it has two layers we&#x27;ll cover.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Credibility hook:&lt;/strong&gt; 16 years across banking, FMCG, retail, hospitality. Two books: &lt;em&gt;Organisation Design for Real Decisions&lt;/em&gt;, &lt;em&gt;Skill-Based Organisation&lt;/em&gt;. Architect of ONE Global HCMS for a 32,000-employee FMCG group across 9 countries.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hook to slide 2:&lt;/strong&gt; &quot;Let me show you the paradox that defines this moment.&quot;&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>PEOPLESHR WEBINAR · 18 JUNE 2026</span></div>
+      <div class="right"><span>01</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">01 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content" style="display:flex;flex-direction:column;justify-content:center;height:calc(100% - 168px);position:relative;">
+
+        <!-- Ambient Nusva teal orb background -->
+        <div style="position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:520px;height:520px;border-radius:50%;background:radial-gradient(circle, rgba(30,202,211,0.10) 0%, rgba(15,163,177,0.06) 45%, transparent 70%);pointer-events:none;"></div>
+        <div style="position:absolute;right:100px;bottom:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle, rgba(10,61,98,0.06) 0%, transparent 70%);pointer-events:none;"></div>
+
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:72px;align-items:center;position:relative;z-index:1;">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:10px;background:var(--blue-soft);border-radius:2px;padding:6px 14px;margin-bottom:28px;">
+              <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--nusva-teal);"></span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--nusva-teal);font-weight:500;">PeoplesHR Webinar · 18 June 2026</span>
+            </div>
+            <h1 class="display" style="font-size:clamp(64px,6.4vw,96px);font-weight:800;color:var(--ink);line-height:0.94;letter-spacing:-0.032em;">
+              The<br>Thinking<br><em style="font-style:normal;color:var(--nusva-teal);">Organisation.</em>
+            </h1>
+            <p style="margin-top:28px;font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;line-height:1.45;color:rgba(10,61,98,0.65);letter-spacing:-0.008em;max-width:460px;font-weight:400;">
+              How AI is changing the way we design, deploy and manage people.
+            </p>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:44px;">
+              <div style="width:36px;height:3px;background:linear-gradient(90deg,#0FA3B1,#1ECAD3);border-radius:2px;flex-shrink:0;"></div>
+              <div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;color:var(--ink);letter-spacing:-0.01em;">Rangga Irawan Prasetyo, MBA</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--nusva-teal);margin-top:5px;">Digital HR Architect · Founder, Nusva Group</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:center;align-items:center;">
+            <svg viewBox="0 10 510 540" width="100%" style="max-width:420px;" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="cv-teal" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0FA3B1" stop-opacity="1"/>
+                  <stop offset="1" stop-color="#1ECAD3" stop-opacity="0.7"/>
+                </linearGradient>
+              </defs>
+
+              <!-- LAYER 01 · SPINE — translate y=60 so label sits at absolute y=46 -->
+              <g transform="translate(55 60)" stroke="#0A3D62" fill="none" stroke-width="1.5" opacity="0.9">
+                <text x="0" y="-16" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0A3D62" stroke="none" letter-spacing="1.2" font-weight="700">LAYER 01 · SPINE</text>
+                <line x1="0" y1="-8" x2="148" y2="-8" stroke="#0FA3B1" stroke-width="1.5" opacity="0.6"/>
+                <line x1="0" y1="0" x2="0" y2="420"/>
+                <circle cx="0" cy="14"  r="5" fill="#0A3D62" stroke="none"/>
+                <circle cx="0" cy="110" r="5" fill="#0A3D62" stroke="none"/>
+                <circle cx="0" cy="206" r="7" fill="url(#cv-teal)" stroke="none"/>
+                <circle cx="0" cy="302" r="5" fill="#0A3D62" stroke="none"/>
+                <circle cx="0" cy="398" r="5" fill="#0A3D62" stroke="none"/>
+                <g stroke="#0FA3B1" opacity="0.6">
+                  <line x1="-8" y1="14"  x2="8" y2="14"/>
+                  <line x1="-8" y1="110" x2="8" y2="110"/>
+                  <line x1="-8" y1="302" x2="8" y2="302"/>
+                  <line x1="-8" y1="398" x2="8" y2="398"/>
+                </g>
+              </g>
+
+              <!-- AI MULTIPLIER — centered between spine and matrix -->
+              <g transform="translate(175 270)">
+                <circle r="80" fill="rgba(30,202,211,0.06)" stroke="#1ECAD3" stroke-width="1.2" opacity="0.65"/>
+                <circle r="56" fill="rgba(15,163,177,0.09)" stroke="#0FA3B1" stroke-width="1" opacity="0.5"/>
+                <text x="0" y="8" text-anchor="middle" font-family="Outfit, sans-serif" font-size="34" fill="#0A3D62" font-weight="800" letter-spacing="-0.02em">AI</text>
+                <text x="0" y="28" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0FA3B1" letter-spacing="1.4" font-weight="600">MULTIPLIER</text>
+              </g>
+
+              <!-- LAYER 02 · PORTFOLIO — same translate y=60 as spine, label aligns -->
+              <!-- Cell height=72, gap=15 → total 5×72 + 4×15 = 420 = spine height -->
+              <g transform="translate(278 60)" opacity="0.90">
+                <text x="0" y="-16" font-family="IBM Plex Mono, monospace" font-size="11" fill="#0A3D62" letter-spacing="1.2" font-weight="700">LAYER 02 · PORTFOLIO</text>
+                <line x1="0" y1="-8" x2="200" y2="-8" stroke="#0FA3B1" stroke-width="1.5" opacity="0.6"/>
+                <!-- grid: 3 cols (26px wide, 4px gap), 5 rows (72px tall, 15px gap) -->
+                <g stroke="#0FA3B1" stroke-width="0.9" fill="none" opacity="0.55">
+                  <!-- row 1: y=0 -->
+                  <rect x="0"  y="0"   width="26" height="72"/>
+                  <rect x="30" y="0"   width="26" height="72"/>
+                  <rect x="60" y="0"   width="26" height="72"/>
+                  <!-- row 2: y=87 -->
+                  <rect x="0"  y="87"  width="26" height="72"/>
+                  <rect x="30" y="87"  width="26" height="72"/>
+                  <rect x="60" y="87"  width="26" height="72"/>
+                  <!-- row 3: y=174 -->
+                  <rect x="0"  y="174" width="26" height="72"/>
+                  <rect x="30" y="174" width="26" height="72"/>
+                  <rect x="60" y="174" width="26" height="72"/>
+                  <!-- row 4: y=261 -->
+                  <rect x="0"  y="261" width="26" height="72"/>
+                  <rect x="30" y="261" width="26" height="72"/>
+                  <rect x="60" y="261" width="26" height="72"/>
+                  <!-- row 5: y=348 -->
+                  <rect x="0"  y="348" width="26" height="72"/>
+                  <rect x="30" y="348" width="26" height="72"/>
+                  <rect x="60" y="348" width="26" height="72"/>
+                </g>
+                <!-- highlighted cells -->
+                <rect x="0"  y="0"   width="26" height="72" fill="#0FA3B1" opacity="0.18"/>
+                <rect x="30" y="87"  width="26" height="72" fill="#0FA3B1" opacity="0.32"/>
+                <rect x="30" y="174" width="26" height="72" fill="#1ECAD3" opacity="0.45"/>
+                <rect x="60" y="261" width="26" height="72" fill="#0FA3B1" opacity="0.20"/>
+                <rect x="0"  y="348" width="26" height="72" fill="#0FA3B1" opacity="0.40"/>
+                <rect x="60" y="348" width="26" height="72" fill="#1ECAD3" opacity="0.58"/>
+              </g>
+
+              <!-- caption -->
+              <g transform="translate(20 502)" font-family="IBM Plex Mono, monospace" fill="#0FA3B1">
+              </g>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;Set up the paradox (60-90 sec).&lt;/strong&gt; Latest McKinsey State of AI 2025 (n=1,993 across 105 nations): 88% of organisations are regularly using AI. But only 39% report any enterprise EBIT impact, and most below 5%. Only 6% are AI high performers.&lt;/p&gt;
+&lt;p&gt;This is not a story about AI being bad. AI works. The technology is real. The problem is structural · most organisations are deploying AI on top of architecture that was never designed to think.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bridge:&lt;/strong&gt; &quot;If your house has bad wiring, a smarter appliance will not light up the house. It just trips the breaker.&quot; That&#x27;s where most organisations are right now.&lt;/p&gt;
+&lt;p&gt;Pause here. Let the numbers land.&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT ONE · THE PARADOX</span></div>
+      <div class="right"><span>02</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">02 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="display:grid;grid-template-columns:1fr;gap:0;height:100%;">
+          <div style="margin-bottom:40px;">
+            <h2 class="headline" style="margin-top:18px;max-width:840px;">
+              The world's organisations are deploying AI <em>faster than they can absorb it.</em>
+            </h2>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;">
+
+            <div style="position:relative;border-top:1px solid var(--ink);padding-top:24px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;font-weight:500;">
+                Regularly using AI
+              </div>
+              <div class="numeric" style="font-size:170px;color:var(--ink);font-weight:280;letter-spacing:-0.06em;">88<span style="font-size:78px;vertical-align:24px;font-weight:300;">%</span></div>
+              <p class="body" style="margin-top:10px;max-width:380px;font-size:15px;line-height:1.45;">
+                of organisations globally now regularly use AI in at least one business function. Production workloads, not pilots.
+              </p>
+            </div>
+
+            <div style="position:relative;border-top:1px solid var(--ink);padding-top:24px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--nusva-teal);margin-bottom:12px;font-weight:500;">
+                AI high performers
+              </div>
+              <div class="numeric" style="font-size:170px;color:var(--nusva-teal);font-weight:280;letter-spacing:-0.06em;">6<span style="font-size:78px;vertical-align:24px;font-weight:300;">%</span></div>
+              <p class="body" style="margin-top:10px;max-width:380px;font-size:15px;line-height:1.45;">
+                see 5% or more EBIT impact from AI. Over 80% of organisations report no measurable enterprise-wide bottom-line effect. The wiring is missing.
+              </p>
+            </div>
+
+          </div>
+
+          <div style="margin-top:28px;padding-top:18px;border-top:1px solid var(--edge);display:flex;justify-content:space-between;align-items:baseline;gap:40px;">
+            <p class="pull-quote" style="font-size:20px;max-width:760px;line-height:1.2;">
+              "Only 21% of organisations have redesigned workflows. Workflow redesign correlates highest with EBIT impact. The technology works. The operating system around it has not changed."
+            </p>
+            <div class="attribution" style="text-align:right;flex-shrink:0;">
+              Source · McKinsey<br>State of AI 2025
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;Three voices from the field (90 sec).&lt;/strong&gt; Three composite cases drawn from advisory engagements over the last twelve months. Different industries, same structural symptom.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FMCG CEO:&lt;/strong&gt; Pricing decisions take 12 days. Competitors move in 3.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Banking CEO:&lt;/strong&gt; Product change cycle 16 weeks. Market moves in days.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tech CEO:&lt;/strong&gt; Receiving 15 escalations per day. Cannot think strategically anymore.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bridge:&lt;/strong&gt; &quot;Three industries. Three different scales. Same structural fault. The cause is not industry-specific. The cause is architectural.&quot;&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT ONE · THE EVIDENCE</span></div>
+      <div class="right"><span>03</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">03 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:36px;">
+          <h2 class="headline" style="margin-top:18px;max-width:900px;">
+            Three CEOs. Three industries. <em>The same structural fault.</em>
+          </h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;height:340px;">
+          
+        <div style="display:flex;flex-direction:column;height:100%;">
+          <div style="border-top:2px solid var(--nusva-teal);padding-top:18px;margin-bottom:24px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--nusva-teal);font-weight:500;">
+              FMCG · CONSUMER GOODS
+            </div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:22px;line-height:1.32;letter-spacing:-0.015em;color:var(--ink);position:relative;padding-left:18px;flex:1;">
+            <span style="position:absolute;left:-2px;top:-12px;font-family:'Outfit',sans-serif;font-size:64px;color:var(--nusva-teal);opacity:0.45;line-height:1;font-style:normal;">&ldquo;</span>
+            Why does every pricing decision take twelve days? Our competitors move in three.
+          </div>
+          <div style="margin-top:auto;padding-top:24px;border-top:1px solid var(--edge);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);line-height:1.5;">
+              CEO · FMCG Group · Southeast Asia
+            </div>
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;height:100%;">
+          <div style="border-top:2px solid var(--blue);padding-top:18px;margin-bottom:24px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--blue);font-weight:500;">
+              BANKING · FINANCIAL SERVICES
+            </div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:22px;line-height:1.32;letter-spacing:-0.015em;color:var(--ink);position:relative;padding-left:18px;flex:1;">
+            <span style="position:absolute;left:-2px;top:-12px;font-family:'Outfit',sans-serif;font-size:64px;color:var(--blue);opacity:0.45;line-height:1;font-style:normal;">&ldquo;</span>
+            Product change takes sixteen weeks to launch. We are always behind the market.
+          </div>
+          <div style="margin-top:auto;padding-top:24px;border-top:1px solid var(--edge);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);line-height:1.5;">
+              CEO · Syariah Bank · ASEAN
+            </div>
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;height:100%;">
+          <div style="border-top:2px solid var(--forest);padding-top:18px;margin-bottom:24px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--forest);font-weight:500;">
+              TECH · STARTUP
+            </div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:22px;line-height:1.32;letter-spacing:-0.015em;color:var(--ink);position:relative;padding-left:18px;flex:1;">
+            <span style="position:absolute;left:-2px;top:-12px;font-family:'Outfit',sans-serif;font-size:64px;color:var(--forest);opacity:0.45;line-height:1;font-style:normal;">&ldquo;</span>
+            I receive fifteen escalations per day. I cannot think strategically anymore.
+          </div>
+          <div style="margin-top:auto;padding-top:24px;border-top:1px solid var(--edge);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate);line-height:1.5;">
+              CEO · Tech Startup · Indonesia
+            </div>
+          </div>
+        </div>
+        
+        </div>
+
+        <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--edge);font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--mist);line-height:1.5;text-transform:uppercase;">
+          Composite cases from advisory engagements · Pattern echoes Deloitte 2025 Human Capital Trends: only 6% of workers see their organisation making great progress in creating AI value
+        </div>
+
+      </div>
+    </section>
+
+    <!-- === NEW SLIDE: THREE ECONOMIES === -->
+    <section class="slide" data-notes='<p><strong>The structural blind spot (60-90 sec).</strong> Bridge from the three voices to the framework.</p><p>Every workforce operates across three concurrent economies: the <strong>Payroll Economy</strong> (permanent, counted, visible to HRIS), the <strong>Project Economy</strong> (contractors, freelancers, platform workers — often invisible), and the <strong>Automated Economy</strong> (AI agents, bots, RPA — not counted as workforce at all).</p><p>Most HRIS platforms were designed in the payroll era. They see one economy. The other two are dark matter — they exist, they do work, they consume budget, but they do not appear in your headcount reports.</p><p><strong>Bridge:</strong> "This is why AI investment does not translate to productivity. You are optimising one layer of a three-layer system."</p>'>
+
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT ONE · THE EVIDENCE</span></div>
+      <div class="right"><span>05</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">04 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+
+    <div class="content" style="display:flex;flex-direction:column;justify-content:center;gap:0;">
+
+      <!-- Statement block -->
+      <div style="max-width:780px;margin-bottom:52px;">
+        <p class="label" style="margin-bottom:18px;color:var(--nusva-teal);">The Structural Blind Spot</p>
+        <hr class="rule short" style="background:var(--nusva-teal);margin-bottom:24px;">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(38px,4.2vw,58px);line-height:1.01;letter-spacing:-0.03em;color:var(--ink);margin-bottom:0;text-rendering:geometricPrecision;">
+          Every workforce now contains<br>
+          <span style="color:var(--blue);">three economies.</span>
+        </h2>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:500;font-size:clamp(28px,3vw,40px);line-height:1.08;letter-spacing:-0.02em;color:var(--carbon);margin-top:12px;text-rendering:geometricPrecision;">
+          Most HRIS sees only one.
+        </h2>
+      </div>
+
+      <!-- Three economies visual -->
+      <div style="display:flex;gap:24px;align-items:stretch;">
+
+        <!-- Economy 1: VISIBLE -->
+        <div style="flex:1;background:var(--ink);border-radius:4px;padding:28px 28px 24px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Economy 01 · Visible</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:var(--paper);letter-spacing:-0.02em;margin-bottom:8px;line-height:1.1;">Payroll<br>Economy</p>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.95);line-height:1.5;margin-bottom:16px;">Permanent employees. Counted. Tracked. The only layer most HRIS platforms were built for.</p>
+          <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(30,202,211,0.18);border:1px solid rgba(30,202,211,0.40);border-radius:2px;padding:4px 10px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;">HRIS Coverage: Full</span>
+          </div>
+        </div>
+
+        <!-- Economy 2: PARTIALLY BLIND -->
+        <div style="flex:1;background:var(--blue-soft);border-radius:4px;padding:28px 28px 24px;position:relative;overflow:hidden;border:1.5px solid var(--blue-soft);">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue);opacity:0.5;"></div>
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;opacity:0.7;">Economy 02 · Partial</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:var(--blue-deep);letter-spacing:-0.02em;margin-bottom:8px;line-height:1.1;">Project<br>Economy</p>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--carbon);line-height:1.5;margin-bottom:16px;">Contractors, freelancers, platform workers. They deliver work. They rarely appear in your workforce data.</p>
+          <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(30,79,139,0.12);border:1px solid rgba(30,79,139,0.3);border-radius:2px;padding:4px 10px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--blue-deep);text-transform:uppercase;">HRIS Coverage: Partial</span>
+          </div>
+        </div>
+
+        <!-- Economy 3: INVISIBLE -->
+        <div style="flex:1;background:var(--edge-soft);border-radius:4px;padding:28px 28px 24px;position:relative;overflow:hidden;border:1.5px dashed var(--edge);">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--mist);opacity:0.4;"></div>
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--slate);margin-bottom:10px;opacity:0.6;">Economy 03 · Invisible</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:var(--slate);letter-spacing:-0.02em;margin-bottom:8px;line-height:1.1;">Automated<br>Economy</p>
+          <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--slate);line-height:1.5;margin-bottom:16px;">AI agents, bots, RPA processes. They perform tasks, consume budget, and produce output. Headcount: zero.</p>
+          <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(92,90,84,0.1);border:1px solid rgba(92,90,84,0.25);border-radius:2px;padding:4px 10px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--slate);text-transform:uppercase;">HRIS Coverage: None</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="source">Framework: Rangga Irawan Prasetyo · Nusva People Workforce Intelligence Layer · 2026</div>
+    </div>
+    </section>
+
+    <section class="slide dark" data-notes='&lt;p&gt;&lt;strong&gt;The framework (3-4 minutes · this is the centrepiece).&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Thinking organisations run on &lt;strong&gt;two integrated layers&lt;/strong&gt;, not one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Layer 1: The Decision Spine.&lt;/strong&gt; How decisions move from problem to action. Trigger → Input → Forum → Decider → Exit. This is wiring. It carries responsiveness.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Layer 2: The Capability Portfolio.&lt;/strong&gt; How human skills are organised, classified, valued, and compounded. This is the engine. It carries execution.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AI is the multiplier between them.&lt;/strong&gt; AI does not decide. AI does not have skills. AI compounds both layers · &lt;em&gt;if both layers exist.&lt;/em&gt; If only one exists, AI multiplies the gap.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pause:&lt;/strong&gt; &quot;If a CEO asks me one diagnostic question, it&#x27;s this: which of these two layers is missing in your organisation? Most have one. Almost none have both.&quot;&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT TWO · THE FRAMEWORK</span></div>
+      <div class="right"><span>05 / CENTREPIECE</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">05 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:22px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:var(--gold);font-weight:500;text-transform:uppercase;">
+            Fig. 04 / The Thinking Architecture · A Synthesis for Today's Talk
+          </div>
+          <h2 class="headline" style="margin-top:12px;color:var(--ink);max-width:1000px;font-size:36px;">
+            Thinking organisations run on <em style="color:var(--gold);font-style:italic;">two integrated layers</em>, not one.
+          </h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 80px 1fr;gap:0;align-items:stretch;">
+
+          <!-- LEFT: DECISION SPINE -->
+          <div style="border:1px solid rgba(10,61,98,0.12);padding:22px 24px 18px;background:rgba(10,61,98,0.03);">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:rgba(10,61,98,0.55);font-weight:500;">LAYER 01</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--gold);">WIRING</div>
+            </div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:24px;color:var(--ink);letter-spacing:-0.015em;margin-bottom:4px;">
+              The Decision Spine
+            </div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;color:var(--carbon);margin-bottom:18px;letter-spacing:-0.005em;">
+              How decisions move from problem to action
+            </div>
+
+            <!-- Vertical spine ladder — bigger dots + longer line -->
+            <div style="position:relative;padding-left:44px;margin-top:8px;">
+              <div style="position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:rgba(10,61,98,0.15);border-radius:1px;"></div>
+              
+              <div style="position:relative;margin-bottom:22px;">
+                <div style="position:absolute;left:-36px;top:2px;width:22px;height:22px;border-radius:50%;background:var(--nusva-teal);box-shadow:0 0 0 4px rgba(15,163,177,0.15);"></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:rgba(10,61,98,0.45);">STAGE 01</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:18px;color:var(--ink);letter-spacing:-0.008em;line-height:1.2;">Trigger</div>
+              </div>
+              
+              <div style="position:relative;margin-bottom:22px;">
+                <div style="position:absolute;left:-36px;top:2px;width:22px;height:22px;border-radius:50%;background:var(--nusva-teal);box-shadow:0 0 0 4px rgba(15,163,177,0.15);"></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:rgba(10,61,98,0.45);">STAGE 02</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:18px;color:var(--ink);letter-spacing:-0.008em;line-height:1.2;">Input</div>
+              </div>
+              
+              <div style="position:relative;margin-bottom:22px;">
+                <div style="position:absolute;left:-36px;top:2px;width:22px;height:22px;border-radius:50%;background:var(--nusva-cyan);box-shadow:0 0 0 4px rgba(30,202,211,0.15);"></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:rgba(10,61,98,0.45);">STAGE 03</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:18px;color:var(--ink);letter-spacing:-0.008em;line-height:1.2;">Forum</div>
+              </div>
+              
+              <div style="position:relative;margin-bottom:22px;">
+                <div style="position:absolute;left:-36px;top:2px;width:22px;height:22px;border-radius:50%;background:var(--nusva-teal);box-shadow:0 0 0 4px rgba(15,163,177,0.15);"></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:rgba(10,61,98,0.45);">STAGE 04</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:18px;color:var(--ink);letter-spacing:-0.008em;line-height:1.2;">Decider</div>
+              </div>
+              
+              <div style="position:relative;margin-bottom:8px;">
+                <div style="position:absolute;left:-36px;top:2px;width:22px;height:22px;border-radius:50%;background:var(--nusva-dark);box-shadow:0 0 0 4px rgba(10,61,98,0.12);"></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:rgba(10,61,98,0.45);">STAGE 05</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:18px;color:var(--ink);letter-spacing:-0.008em;line-height:1.2;">Exit</div>
+              </div>
+              
+            </div>
+          </div>
+
+          <!-- MIDDLE: AI MULTIPLIER -->
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;">
+            <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:100%;background:rgba(10,61,98,0.10);"></div>
+            <div style="background:var(--ink);border:2px solid var(--gold);border-radius:50%;width:64px;height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-size:22px;color:var(--nusva-cyan);font-weight:600;line-height:1;">AI</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;letter-spacing:0.18em;color:var(--gold);margin-top:1px;">MULTIPLIER</div>
+            </div>
+            <div style="margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--slate);text-align:center;width:130px;line-height:1.5;">
+              COMPOUNDS BOTH LAYERS, IF BOTH EXIST
+            </div>
+          </div>
+
+          <!-- RIGHT: CAPABILITY PORTFOLIO -->
+          <div style="border:1px solid rgba(10,61,98,0.12);padding:22px 24px 18px;background:rgba(10,61,98,0.03);">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:rgba(10,61,98,0.55);font-weight:500;">LAYER 02</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--gold);">ENGINE</div>
+            </div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:24px;color:var(--ink);letter-spacing:-0.015em;margin-bottom:4px;">
+              The Capability Portfolio
+            </div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;color:var(--carbon);margin-bottom:14px;letter-spacing:-0.005em;">
+              How human skills are organised and compounded with AI
+            </div>
+
+            <!-- Capability matrix - 5 cols x 4 rows (compressed) -->
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px;">
+              <div style="aspect-ratio:1.4;background:rgba(232,112,110,0.70);border:1px solid rgba(10,61,98,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(232,112,110,0.70);border:1px solid rgba(10,61,98,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.65);border:1px solid rgba(10,61,98,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.65);border:1px solid rgba(10,61,98,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(10,61,98,0.68);border:1px solid rgba(10,61,98,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(10,61,98,0.68);border:1px solid rgba(10,61,98,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(15,163,177,0.06);border:1px solid rgba(15,163,177,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(10,61,98,0.82);border:1px solid rgba(10,61,98,0.18);"></div><div style="aspect-ratio:1.4;background:rgba(10,61,98,0.82);border:1px solid rgba(10,61,98,0.18);"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--slate);">
+              <span>DECLINING</span>
+              <span>RISING</span>
+              <span>EMERGENT</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom takeaway -->
+        <div style="margin-top:14px;border-top:1px solid rgba(10,61,98,0.18);padding-top:12px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--gold);font-weight:600;">THE TAKEAWAY</div>
+          <div>
+            <div class="pull-quote" style="font-size:16px;color:var(--ink);line-height:1.2;">
+              Layer one without two: brilliant decisions, no execution. Layer two without one: capable people, stuck workflow.
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;Diagnose the spine (2 minutes).&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A decision has five components: Trigger, Input, Forum, Decider, Exit. Decisions get stuck in three predictable places.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Stuck 1 · No Trigger Owner:&lt;/strong&gt; No one is accountable for when the decision needs to be made. So it isn&#x27;t.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Stuck 2 · Wrong Forum:&lt;/strong&gt; The decision lives in the wrong meeting, with the wrong people. Three weeks of &quot;alignment&quot; replaces fifteen minutes of decision.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Stuck 3 · No Single Accountable Owner:&lt;/strong&gt; The decider is a committee. Or worse, &quot;everyone.&quot; That means no one.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bridge:&lt;/strong&gt; &quot;Now watch what AI does to each of these. It is not a fix for the spine. It is an accelerator &lt;em&gt;of&lt;/em&gt; the spine you already have.&quot;&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT TWO · DECISION ANATOMY</span></div>
+      <div class="right"><span>06</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">06 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:32px;">
+          <h2 class="headline" style="margin-top:18px;max-width:920px;">
+            A decision has five parts. <em>Three of them are where the wheels come off.</em>
+          </h2>
+        </div>
+
+        <!-- 5-stage flow -->
+        <div style="position:relative;">
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:18px;">
+            
+        <div style="position:relative;border:1.5px solid var(--ink);background:var(--paper);padding:24px 20px;display:flex;flex-direction:column;min-height:180px;">
+          
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--ink);font-weight:500;margin-bottom:14px;">STAGE 01</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:24px;color:var(--ink);letter-spacing:-0.015em;line-height:1.05;margin-bottom:8px;">Trigger</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--slate);">The event that says: a decision is needed now.</div>
+        </div>
+        
+        <div style="position:relative;border:1.5px solid var(--ink);background:var(--vermillion-soft);padding:24px 20px;display:flex;flex-direction:column;min-height:180px;">
+          <div style="position:absolute;top:-10px;right:-10px;background:var(--nusva-teal);color:var(--paper);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;">!</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--nusva-teal);font-weight:500;margin-bottom:14px;">STAGE 02</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:24px;color:var(--ink);letter-spacing:-0.015em;line-height:1.05;margin-bottom:8px;">Input</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--slate);">Data, perspectives, options on the table.</div>
+        </div>
+        
+        <div style="position:relative;border:1.5px solid var(--ink);background:var(--vermillion-soft);padding:24px 20px;display:flex;flex-direction:column;min-height:180px;">
+          <div style="position:absolute;top:-10px;right:-10px;background:var(--nusva-teal);color:var(--paper);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;">!</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--nusva-teal);font-weight:500;margin-bottom:14px;">STAGE 03</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:24px;color:var(--ink);letter-spacing:-0.015em;line-height:1.05;margin-bottom:8px;">Forum</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--slate);">Where the conversation actually happens.</div>
+        </div>
+        
+        <div style="position:relative;border:1.5px solid var(--ink);background:var(--vermillion-soft);padding:24px 20px;display:flex;flex-direction:column;min-height:180px;">
+          <div style="position:absolute;top:-10px;right:-10px;background:var(--nusva-teal);color:var(--paper);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;">!</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--nusva-teal);font-weight:500;margin-bottom:14px;">STAGE 04</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:24px;color:var(--ink);letter-spacing:-0.015em;line-height:1.05;margin-bottom:8px;">Decider</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--slate);">The single accountable owner who chooses.</div>
+        </div>
+        
+        <div style="position:relative;border:1.5px solid var(--ink);background:var(--paper);padding:24px 20px;display:flex;flex-direction:column;min-height:180px;">
+          
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--ink);font-weight:500;margin-bottom:14px;">STAGE 05</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:24px;color:var(--ink);letter-spacing:-0.015em;line-height:1.05;margin-bottom:8px;">Exit</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--slate);">How the decision becomes action.</div>
+        </div>
+        
+          </div>
+        </div>
+
+        <!-- Three causes legend -->
+        <div style="margin-top:28px;display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:32px;align-items:start;padding-top:20px;border-top:1px solid var(--edge);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--nusva-teal);font-weight:600;align-self:center;">
+            THREE<br>STUCK<br>POINTS
+          </div>
+          
+          <div>
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--nusva-teal);font-weight:600;">→ INPUT</span>
+            </div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--carbon);">Data is collected by everyone, owned by no one. Quality varies. Trust collapses.</div>
+          </div>
+          
+          <div>
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--nusva-teal);font-weight:600;">→ FORUM</span>
+            </div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--carbon);">Wrong room, wrong people, wrong cadence. Alignment replaces decision.</div>
+          </div>
+          
+          <div>
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--nusva-teal);font-weight:600;">→ DECIDER</span>
+            </div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--carbon);">A committee decides. Which means no one decides. The clock runs out.</div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;AI on the spine (2 min).&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;McKinsey 2025 found workflow redesign correlates highest with EBIT impact from AI. But only 21% have done it. The high performers are 3x more likely to fundamentally redesign workflows.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Three things AI high performers do that the 94% laggards don&#x27;t:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Workflow Redesign.&lt;/strong&gt; Not layering AI on top of existing processes. Rebuilding the process around what AI can now do.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Human-in-the-Loop.&lt;/strong&gt; Clear validation points where humans approve AI output, not blanket auto-approval.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Capital Allocation.&lt;/strong&gt; For every dollar in AI tools, multiple dollars in human capability development around them.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hard limit:&lt;/strong&gt; AI does not decide. AI does not own. AI does not bear consequence. If your Decider is unclear, AI gives faster confusion.&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT TWO · WHY MOST AI DEPLOYMENTS FAIL</span></div>
+      <div class="right"><span>07</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">07 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:22px;">
+          <h2 class="headline" style="margin-top:14px;max-width:950px;font-size:clamp(28px,2.8vw,40px);letter-spacing:-0.028em;">
+            AI failure is not a technology problem. <em>It is a problem of architecture around the technology.</em>
+          </h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;">
+          
+        <div style="display:flex;flex-direction:column;background:var(--paper-warm);border-top:2px solid var(--blue);padding:22px 22px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:500;">AI HIGH PERFORMER · 01</div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:24px;color:var(--ink);letter-spacing:-0.018em;line-height:1.05;margin-bottom:10px;">Workflow Redesign</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--carbon);margin-bottom:auto;">AI high performers fundamentally rework workflows when deploying AI, not just layer tools on top. McKinsey: workflow redesign correlates highest with EBIT impact, yet only 21% of organisations have done it.</div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--edge);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--slate);">WORKFLOW REDESIGN</div>
+            <div class="numeric" style="font-size:36px;color:var(--blue);font-weight:320;letter-spacing:-0.03em;margin-top:2px;">3.6x</div>
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;background:var(--paper-warm);border-top:2px solid var(--blue);padding:22px 22px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:500;">AI HIGH PERFORMER · 02</div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:24px;color:var(--ink);letter-spacing:-0.018em;line-height:1.05;margin-bottom:10px;">Human-in-the-Loop</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--carbon);margin-bottom:auto;">High performers define clear validation processes for AI output at decision stages, not blanket auto-approval. This is what separates them from AI deployment that loses trust within a quarter.</div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--edge);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--slate);">INCIDENT RATE</div>
+            <div class="numeric" style="font-size:36px;color:var(--blue);font-weight:320;letter-spacing:-0.03em;margin-top:2px;">51% report AI incidents</div>
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;background:var(--paper-warm);border-top:2px solid var(--blue);padding:22px 22px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:500;">AI HIGH PERFORMER · 03</div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:24px;color:var(--ink);letter-spacing:-0.018em;line-height:1.05;margin-bottom:10px;">Capital Allocation</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.45;color:var(--carbon);margin-bottom:auto;">Top AI performers invest 20%+ of digital budget in AI versus 5% for laggards. The investment is not in tools alone but in the human capability layer that surrounds the tools.</div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--edge);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--slate);">BUDGET ALLOCATION</div>
+            <div class="numeric" style="font-size:36px;color:var(--blue);font-weight:320;letter-spacing:-0.03em;margin-top:2px;">20% vs 5%</div>
+          </div>
+        </div>
+        
+        </div>
+
+        <!-- Hard limit warning -->
+        <div style="margin-top:18px;background:var(--ink);color:var(--paper);padding:16px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--gold);font-weight:600;">
+            HARD<br>LIMIT
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:17px;line-height:1.3;letter-spacing:-0.015em;">
+            AI does not decide. AI does not own. AI does not bear consequence. If your <em style="color:var(--gold);">Decider</em> is unclear, AI gives you faster confusion.
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--mist);text-align:right;">
+            DECIDER<br>STAYS HUMAN
+          </div>
+        </div>
+
+        <div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--mist);text-transform:uppercase;line-height:1.5;">
+          Source · McKinsey State of AI 2025 (n=1,993 across 105 nations) · Deloitte State of AI in Enterprise 2026
+        </div>
+
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;The diagnostic (90 sec).&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For any decision in your organisation, ask four questions. If all four return clear answers, you have a Single Accountable Owner. If any one is fuzzy, the decision will get stuck.&lt;/p&gt;
+&lt;p&gt;This is the most practical tool of the day. Take it back. Run it on the three most expensive recurring decisions in your business.&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT TWO · DIAGNOSTIC</span></div>
+      <div class="right"><span>08</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">08 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:20px;">
+          <h2 class="headline" style="margin-top:18px;max-width:880px;">
+            Four questions. Any fuzzy answer means the decision <em>will get stuck.</em>
+          </h2>
+        </div>
+
+        <div style="margin-top:8px;">
+          
+        <div style="display:grid;grid-template-columns:90px 1fr 1.4fr;gap:32px;align-items:start;padding:24px 0;border-bottom:1px solid var(--edge);">
+          <div>
+            <div class="numeric" style="font-size:48px;color:var(--ink);font-weight:280;line-height:0.9;">01</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:600;margin-top:6px;">AUTHORITY</div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:22px;line-height:1.18;letter-spacing:-0.018em;color:var(--ink);">
+            Who can say no · and have it stick?
+          </div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;line-height:1.5;color:var(--slate);padding-top:6px;">
+            If three people can each veto and none can approve alone, you do not have an owner. You have a queue.
+          </div>
+        </div>
+        
+        <div style="display:grid;grid-template-columns:90px 1fr 1.4fr;gap:32px;align-items:start;padding:24px 0;border-bottom:1px solid var(--edge);">
+          <div>
+            <div class="numeric" style="font-size:48px;color:var(--ink);font-weight:280;line-height:0.9;">02</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:600;margin-top:6px;">ACCESS</div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:22px;line-height:1.18;letter-spacing:-0.018em;color:var(--ink);">
+            Who sees the data first, in full, on time?
+          </div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;line-height:1.5;color:var(--slate);padding-top:6px;">
+            If the owner gets a sanitised summary two days after the room, the owner is decorative.
+          </div>
+        </div>
+        
+        <div style="display:grid;grid-template-columns:90px 1fr 1.4fr;gap:32px;align-items:start;padding:24px 0;border-bottom:1px solid var(--edge);">
+          <div>
+            <div class="numeric" style="font-size:48px;color:var(--ink);font-weight:280;line-height:0.9;">03</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:600;margin-top:6px;">MEASUREMENT</div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:22px;line-height:1.18;letter-spacing:-0.018em;color:var(--ink);">
+            Whose number moves when this decision goes well or badly?
+          </div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;line-height:1.5;color:var(--slate);padding-top:6px;">
+            If no one's KPI changes either way, the decision has no consequence · and no owner.
+          </div>
+        </div>
+        
+        <div style="display:grid;grid-template-columns:90px 1fr 1.4fr;gap:32px;align-items:start;padding:24px 0;border-bottom:1px solid var(--edge);">
+          <div>
+            <div class="numeric" style="font-size:48px;color:var(--ink);font-weight:280;line-height:0.9;">04</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:600;margin-top:6px;">CONTINUITY</div>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:22px;line-height:1.18;letter-spacing:-0.018em;color:var(--ink);">
+            Who is still accountable in six months?
+          </div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;line-height:1.5;color:var(--slate);padding-top:6px;">
+            If the owner rotates every quarter or sits outside the executing function, accountability evaporates on contact.
+          </div>
+        </div>
+        
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;Shift to Layer 2 · capability (2 min).&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Finance sees what is paid. The business pays for what cannot be seen on the income statement.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Above the waterline (≈20%):&lt;/strong&gt; Salary, benefits, training spend, recruitment cost, external consultants. Reportable. Defensible. This is what finance sees.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Below the waterline (≈80%):&lt;/strong&gt; Execution cost, opportunity cost, retention cost, decision quality cost, strategic delay cost. None of this hits a P&amp;L line directly · but it determines execution speed and quality.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bridge:&lt;/strong&gt; &quot;If you only manage what finance measures, you are managing 20 percent of your true cost.&quot;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Source:&lt;/strong&gt; &lt;em&gt;Skill-Based Organization&lt;/em&gt;, Bab 2 · The Cost Nobody Measures, pp. 29-38 (framework p. 31-32).&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT THREE · CAPABILITY</span></div>
+      <div class="right"><span>09</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">09 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:24px;">
+          <h2 class="headline" style="margin-top:18px;max-width:900px;">
+            The eighty percent of cost you do not measure <em>is the cost that decides execution.</em>
+          </h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
+
+          <!-- Custom iceberg SVG -->
+          <div style="position:relative;max-height:440px;overflow:visible;">
+            
+    <svg viewBox="0 0 700 540" width="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="overflow:visible;">
+      <defs>
+        <linearGradient id="ice-above" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#FBFAF5" stop-opacity="1"/>
+          <stop offset="1" stop-color="#DCF3F6" stop-opacity="1"/>
+        </linearGradient>
+        <linearGradient id="ice-below" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#0FA3B1" stop-opacity="0.92"/>
+          <stop offset="0.5" stop-color="#0A3D62" stop-opacity="0.96"/>
+          <stop offset="1" stop-color="#0B2440" stop-opacity="1"/>
+        </linearGradient>
+        <linearGradient id="ice-water" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+          <stop offset="0.05" stop-color="#7BBDCA" stop-opacity="0.4"/>
+          <stop offset="1" stop-color="#7BBDCA" stop-opacity="0.05"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Shift the whole iceberg right to center it within larger viewBox -->
+      <g transform="translate(140 0)">
+
+        <!-- Water surface line + ambient -->
+        <line x1="-130" y1="200" x2="430" y2="200" stroke="#1A1A1A" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.4"/>
+        <rect x="-130" y="200" width="560" height="32" fill="url(#ice-water)"/>
+
+        <!-- Above water (irregular jagged crown) -->
+        <path d="M 200,200 L 215,165 L 228,142 L 246,112 L 263,90 L 280,72 L 296,58 L 312,72 L 325,92 L 340,118 L 352,142 L 360,168 L 370,184 L 376,200 Z"
+              fill="url(#ice-above)" stroke="#1A1A1A" stroke-width="1.2"/>
+
+        <!-- internal crystalline facets above water -->
+        <g stroke="#7BBDCA" stroke-width="0.7" fill="none" opacity="0.55">
+          <path d="M 280,72 L 263,92 L 246,116 L 228,144"/>
+          <path d="M 280,72 L 296,90 L 312,118 L 325,140 L 340,170"/>
+          <path d="M 263,92 L 280,114 L 296,90"/>
+          <path d="M 246,116 L 280,114 L 312,118"/>
+          <path d="M 228,144 L 280,114 L 340,170"/>
+          <path d="M 280,114 L 280,170 L 280,200"/>
+          <path d="M 246,116 L 280,170 L 325,140"/>
+        </g>
+
+        <!-- Below water (irregular massive base) -->
+        <path d="M 200,200 L 376,200 L 392,220 L 408,248 L 422,278 L 432,310 L 438,344 L 438,378 L 432,410 L 420,440 L 402,464 L 380,482 L 354,494 L 322,500 L 286,502 L 250,500 L 218,494 L 188,484 L 160,468 L 138,448 L 122,422 L 112,394 L 108,362 L 112,330 L 122,298 L 138,266 L 158,238 L 180,216 Z"
+              fill="url(#ice-below)" stroke="#0B2440" stroke-width="1.5"/>
+
+        <!-- internal crystalline facets below water -->
+        <g stroke="#0FA3B1" stroke-width="0.6" fill="none" opacity="0.32">
+          <path d="M 200,200 L 220,240 L 240,280 L 252,328 L 256,376 L 250,420 L 234,460"/>
+          <path d="M 376,200 L 360,240 L 348,284 L 344,332 L 350,378 L 366,420 L 388,452"/>
+          <path d="M 280,200 L 280,240 L 282,290 L 286,344 L 290,400 L 294,460 L 296,496"/>
+          <path d="M 200,200 L 280,290 L 376,200"/>
+          <path d="M 240,280 L 280,290 L 348,284"/>
+          <path d="M 252,328 L 286,344 L 344,332"/>
+          <path d="M 256,376 L 290,400 L 350,378"/>
+          <path d="M 250,420 L 294,460 L 366,420"/>
+          <path d="M 220,240 L 280,290 L 360,240"/>
+          <path d="M 138,266 L 240,280 L 280,290 L 348,284 L 422,278"/>
+          <path d="M 112,330 L 252,328 L 344,332 L 432,310"/>
+          <path d="M 122,422 L 250,420 L 350,378 L 432,310"/>
+        </g>
+
+        <!-- Brighter highlight strips on facets (subtle) -->
+        <g fill="#0FA3B1" opacity="0.04">
+          <polygon points="200,200 220,240 240,280 252,328 256,376 250,420 234,460 218,494 188,484"/>
+          <polygon points="252,328 256,376 290,400 286,344"/>
+          <polygon points="290,400 350,378 366,420 294,460"/>
+        </g>
+
+        <!-- Leader labels (right side: visible cost) -->
+        <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#1A1A1A" letter-spacing="1.8">
+          <line x1="296" y1="58" x2="446" y2="58" stroke="#1A1A1A" stroke-width="0.6"/>
+          <text x="452" y="62" font-weight="700">VISIBLE COST</text>
+          <text x="452" y="78" fill="#3D7A96" font-size="9.5" letter-spacing="1.2" font-weight="400">recruitment · training</text>
+          <text x="452" y="91" fill="#3D7A96" font-size="9.5" letter-spacing="1.2" font-weight="400">consultants · headcount</text>
+        </g>
+
+        <!-- Leader labels (left side: hidden cost) -->
+        <g font-family="Plus Jakarta Sans, sans-serif" font-size="11" fill="#1A1A1A" letter-spacing="0.5">
+          <line x1="108" y1="362" x2="-25" y2="362" stroke="#1A1A1A" stroke-width="0.6"/>
+          <text x="-32" y="350" text-anchor="end" fill="#1A1A1A" font-weight="700" font-size="11" letter-spacing="0.8">HIDDEN COST</text>
+          <text x="-32" y="364" text-anchor="end" fill="#3D7A96" font-size="9.5" font-weight="400">execution cost</text>
+          <text x="-32" y="378" text-anchor="end" fill="#3D7A96" font-size="9.5" font-weight="400">opportunity cost</text>
+          <text x="-32" y="392" text-anchor="end" fill="#3D7A96" font-size="9.5" font-weight="400">retention cost</text>
+          <text x="-32" y="406" text-anchor="end" fill="#3D7A96" font-size="9.5" font-weight="400">decision quality cost</text>
+          <text x="-32" y="420" text-anchor="end" fill="#3D7A96" font-size="9.5" font-weight="400">strategic delay cost</text>
+        </g>
+
+        <!-- Waterline label -->
+        <text x="-130" y="194" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#3D7A96" letter-spacing="1.6">·  WATERLINE · FINANCE STOPS HERE</text>
+
+        <!-- Big stat over the ice -->
+        <g transform="translate(380 380)">
+          <rect x="-10" y="-30" width="130" height="60" fill="#1A1A1A"/>
+          <text x="55" y="2" text-anchor="middle" font-family="Outfit, sans-serif" font-size="38" fill="#FFFFFF"  font-weight="320" letter-spacing="-2">80%</text>
+          <text x="55" y="20" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="rgba(255,255,255,0.75)" letter-spacing="1.4">OF TRUE COST</text>
+        </g>
+
+      </g>
+
+      <!-- Caption (in outer viewBox space) -->
+    </svg>
+    
+          </div>
+
+          <!-- Labels and analysis -->
+          <div style="display:flex;flex-direction:column;gap:20px;padding-top:8px;">
+
+            <div style="border-left:2px solid var(--blue);padding-left:18px;">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;color:var(--blue);font-weight:600;">ABOVE THE WATERLINE</div>
+                <div class="numeric" style="font-size:32px;color:var(--blue);font-weight:320;letter-spacing:-0.03em;">≈20%</div>
+              </div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;color:var(--ink);letter-spacing:-0.015em;margin-bottom:8px;">What finance sees.</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;line-height:1.5;color:var(--slate);">
+                External recruitment cost. Training spend to close late-identified gaps. Consultants hired for work the internal team should be able to do.
+              </div>
+            </div>
+
+            <div style="border-left:2px solid var(--nusva-teal);padding-left:18px;">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;color:var(--nusva-teal);font-weight:600;">BELOW THE WATERLINE</div>
+                <div class="numeric" style="font-size:32px;color:var(--nusva-teal);font-weight:320;letter-spacing:-0.03em;">≈80%</div>
+              </div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;color:var(--ink);letter-spacing:-0.015em;margin-bottom:8px;">What the business actually pays for.</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;line-height:1.5;color:var(--slate);">
+                Execution cost. Opportunity cost. Retention cost. Decision quality cost. Strategic delay cost. None of it hits a P&amp;L line.
+              </div>
+            </div>
+
+            <div style="background:var(--ink);color:var(--paper);padding:14px 18px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--gold);font-weight:600;margin-bottom:4px;">RULE OF THUMB</div>
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:15px;line-height:1.3;letter-spacing:-0.015em;">
+                If you only manage what finance measures, you are managing twenty percent of your true cost.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;The skill portfolio (90 sec).&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Any large workforce contains three skill categories:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Declining:&lt;/strong&gt; Tasks AI now does better, faster, cheaper. Manual reporting. First-pass data cleaning. Basic translation. Rote analysis.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Rising:&lt;/strong&gt; Tasks that remain human but require new AI fluency. Senior analysis. Decision framing. Coaching. Stakeholder navigation.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Emergent:&lt;/strong&gt; Tasks that did not exist 24 months ago. Prompt design. AI workflow architecture. Model selection. Capability portfolio management itself.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The HR problem:&lt;/strong&gt; Most HRIS classifies people by role, not by skill category. Which means you cannot tell who is shrinking, who is growing, who is leaping. You manage the wrong unit.'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT THREE · SKILL PORTFOLIO</span></div>
+      <div class="right"><span>10</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">10 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:22px;">
+          <h2 class="headline" style="margin-top:14px;max-width:920px;">
+            Every workforce now contains three economies. <em>Most HRIS sees only one.</em>
+          </h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;height:340px;">
+          
+        <div style="display:flex;flex-direction:column;background:var(--paper-warm);padding:0;">
+          <div style="background:#E8706E;padding:14px 18px;color:#FFFFFF;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.18em;font-weight:600;opacity:0.85;">SKILL CATEGORY</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:26px;letter-spacing:-0.02em;line-height:1;margin-top:2px;">DECLINING</div>
+          </div>
+          <div style="padding:14px 18px 16px;flex:1;display:flex;flex-direction:column;">
+            <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14px;line-height:1.25;letter-spacing:-0.012em;color:var(--ink);margin-bottom:10px;">Tasks AI now performs at parity or better.</div>
+            <ul style="list-style:none;padding:0;margin:0;flex:1;"><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Manual reporting</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Data entry & reconciliation</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Basic translation</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Document review</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Form processing</li></ul>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid #E8706E;">
+              <div class="numeric" style="font-size:28px;color:#E8706E;font-weight:320;letter-spacing:-0.03em;line-height:0.95;">40%</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.14em;color:var(--slate);text-transform:uppercase;margin-top:3px;">of employers expect workforce reduction in roles AI automates (WEF 2025)</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;background:var(--paper-warm);padding:0;">
+          <div style="background:#0FA3B1;padding:14px 18px;color:#FFFFFF;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.18em;font-weight:600;opacity:0.85;">SKILL CATEGORY</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:26px;letter-spacing:-0.02em;line-height:1;margin-top:2px;">RISING</div>
+          </div>
+          <div style="padding:14px 18px 16px;flex:1;display:flex;flex-direction:column;">
+            <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14px;line-height:1.25;letter-spacing:-0.012em;color:var(--ink);margin-bottom:10px;">Tasks that remain human but require AI fluency.</div>
+            <ul style="list-style:none;padding:0;margin:0;flex:1;"><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Senior analysis with AI</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Decision framing</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Coaching & mentoring</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Stakeholder navigation</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Contextual judgment</li></ul>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid #0FA3B1;">
+              <div class="numeric" style="font-size:28px;color:#0FA3B1;font-weight:320;letter-spacing:-0.03em;line-height:0.95;">77%</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.14em;color:var(--slate);text-transform:uppercase;margin-top:3px;">of employers planning to upskill workers by 2030 (WEF 2025)</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;background:var(--paper-warm);padding:0;">
+          <div style="background:#0A3D62;padding:14px 18px;color:#FFFFFF;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.18em;font-weight:600;opacity:0.85;">SKILL CATEGORY</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:26px;letter-spacing:-0.02em;line-height:1;margin-top:2px;">EMERGENT</div>
+          </div>
+          <div style="padding:14px 18px 16px;flex:1;display:flex;flex-direction:column;">
+            <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14px;line-height:1.25;letter-spacing:-0.012em;color:var(--ink);margin-bottom:10px;">Tasks that did not exist 24 months ago.</div>
+            <ul style="list-style:none;padding:0;margin:0;flex:1;"><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">AI agent orchestration</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">AI workflow architecture</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Prompt design & evaluation</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Output verification</li><li style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.4;color:var(--carbon);padding:4px 0;border-bottom:1px dotted var(--edge);">Capability auditing</li></ul>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px solid #0A3D62;">
+              <div class="numeric" style="font-size:28px;color:#0A3D62;font-weight:320;letter-spacing:-0.03em;line-height:0.95;">39%</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.14em;color:var(--slate);text-transform:uppercase;margin-top:3px;">of core skills will change by 2030 (WEF Future of Jobs 2025)</div>
+            </div>
+          </div>
+        </div>
+        
+        </div>
+
+        <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--edge);display:flex;align-items:baseline;gap:24px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--nusva-teal);font-weight:600;flex-shrink:0;">THE DIAGNOSTIC</div>
+          <div class="pull-quote" style="font-size:16px;line-height:1.25;">
+            If your HRIS classifies people by role and not by skill category, you cannot tell who is shrinking, who is rising, and who is leaping.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;Make it scorable (2 min).&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The Skill Durability Index. Five dimensions, each scored 1-5.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Automation Resistance&lt;/strong&gt; · how hard is this to replace with AI?&lt;br&gt;
+&lt;strong&gt;Context Dependency&lt;/strong&gt; · how much does it require local, tacit knowledge?&lt;br&gt;
+&lt;strong&gt;Human-AI Complementarity&lt;/strong&gt; · does the skill get stronger with AI as a tool?&lt;br&gt;
+&lt;strong&gt;Strategic Relevance&lt;/strong&gt; · does it sit on the path to revenue or competitive position?&lt;br&gt;
+&lt;strong&gt;Transferability&lt;/strong&gt; · does the skill move with the person to other roles?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scoring tiers:&lt;/strong&gt; 20-25 = high durability, invest aggressively. 13-19 = moderate, augment with AI. Below 13 = re-evaluate.&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT THREE · SDI</span></div>
+      <div class="right"><span>11</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">11 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:18px;">
+          <h2 class="headline" style="margin-top:18px;max-width:920px;">
+            Score every critical skill on five axes. <em>Manage the portfolio, not the role.</em>
+          </h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start;">
+
+          <!-- Pentagon radar SVG -->
+          <div>
+            
+    <svg viewBox="0 0 560 400" width="100%" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;">
+      <polygon points="280.0,175.0 303.8,192.3 294.7,220.2 265.3,220.2 256.2,192.3" fill="none" stroke="#B8E4EA" stroke-width="0.6" opacity="0.35"/>
+<polygon points="280.0,150.0 327.6,184.5 309.4,240.5 250.6,240.5 232.4,184.5" fill="none" stroke="#B8E4EA" stroke-width="0.6" opacity="0.35"/>
+<polygon points="280.0,125.0 351.3,176.8 324.1,260.7 235.9,260.7 208.7,176.8" fill="none" stroke="#B8E4EA" stroke-width="0.6" opacity="0.35"/>
+<polygon points="280.0,100.0 375.1,169.1 338.8,280.9 221.2,280.9 184.9,169.1" fill="none" stroke="#B8E4EA" stroke-width="0.6" opacity="0.35"/>
+<polygon points="280.0,75.0 398.9,161.4 353.5,301.1 206.5,301.1 161.1,161.4" fill="none" stroke="#B8E4EA" stroke-width="0.6" opacity="0.5"/>
+
+      <line x1="280" y1="200" x2="280.0" y2="75.0" stroke="#B8E4EA" stroke-width="0.5" opacity="0.5"/>
+<line x1="280" y1="200" x2="398.9" y2="161.4" stroke="#B8E4EA" stroke-width="0.5" opacity="0.5"/>
+<line x1="280" y1="200" x2="353.5" y2="301.1" stroke="#B8E4EA" stroke-width="0.5" opacity="0.5"/>
+<line x1="280" y1="200" x2="206.5" y2="301.1" stroke="#B8E4EA" stroke-width="0.5" opacity="0.5"/>
+<line x1="280" y1="200" x2="161.1" y2="161.4" stroke="#B8E4EA" stroke-width="0.5" opacity="0.5"/>
+
+      <polygon points="280.0,87.5 379.9,167.6 350.5,297.1 228.6,270.8 182.5,168.3" fill="#0FA3B1" fill-opacity="0.15" stroke="#0FA3B1" stroke-width="1.5"/>
+      <circle cx="280.0" cy="87.5" r="4.5" fill="#0FA3B1"/>
+<circle cx="280.0" cy="87.5" r="2.2" fill="#FFFFFF" opacity="0"/>
+<circle cx="379.9" cy="167.6" r="4.5" fill="#0FA3B1"/>
+<circle cx="379.9" cy="167.6" r="2.2" fill="#FFFFFF" opacity="0"/>
+<circle cx="350.5" cy="297.1" r="4.5" fill="#0FA3B1"/>
+<circle cx="350.5" cy="297.1" r="2.2" fill="#FFFFFF" opacity="0"/>
+<circle cx="228.6" cy="270.8" r="4.5" fill="#0FA3B1"/>
+<circle cx="228.6" cy="270.8" r="2.2" fill="#FFFFFF" opacity="0"/>
+<circle cx="182.5" cy="168.3" r="4.5" fill="#0FA3B1"/>
+<circle cx="182.5" cy="168.3" r="2.2" fill="#FFFFFF" opacity="0"/>
+
+      <text x="284" y="178.0" font-family="IBM Plex Mono, monospace" font-size="8" fill="#7BBDCA">1</text><text x="284" y="128.0" font-family="IBM Plex Mono, monospace" font-size="8" fill="#7BBDCA">3</text><text x="284" y="78" font-family="IBM Plex Mono, monospace" font-size="8" fill="#7BBDCA">5</text>
+      <text x="280.0" y="41.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="1.1" font-weight="600">AUTOMATION</text><text x="280.0" y="53.0" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="1.1" font-weight="600">RESISTANCE</text><text x="425.5" y="146.7" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="1.1" font-weight="600">CONTEXT</text><text x="425.5" y="158.7" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="1.1" font-weight="600">DEPENDENCY</text><text x="369.9" y="317.8" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="1.1" font-weight="600">HUMAN-AI</text><text x="369.9" y="329.8" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="1.1" font-weight="600">COMPLEMENTARITY</text><text x="190.1" y="317.8" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="1.1" font-weight="600">STRATEGIC</text><text x="190.1" y="329.8" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="1.1" font-weight="600">RELEVANCE</text><text x="134.5" y="152.7" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="9" fill="#1A1A1A" letter-spacing="1.1" font-weight="600">TRANSFERABILITY</text>
+
+      <!-- Center mark -->
+      <circle cx="280" cy="200" r="2" fill="#1A1A1A"/>
+
+      <!-- Caption -->
+    </svg>
+    
+          </div>
+
+          <!-- Dimensions + tiers -->
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:600;margin-bottom:12px;">FIVE DIMENSIONS · SCORE 1 EACH</div>
+              
+              <div style="display:grid;grid-template-columns:24px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dotted var(--edge);">
+                <div class="numeric" style="font-size:18px;color:var(--blue);font-weight:320;line-height:1;">01</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--ink);letter-spacing:-0.005em;line-height:1.25;">Automation Resistance</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);font-weight:500;">4.5</div>
+              </div>
+              
+              <div style="display:grid;grid-template-columns:24px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dotted var(--edge);">
+                <div class="numeric" style="font-size:18px;color:var(--blue);font-weight:320;line-height:1;">02</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--ink);letter-spacing:-0.005em;line-height:1.25;">Context Dependency</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);font-weight:500;">4.2</div>
+              </div>
+              
+              <div style="display:grid;grid-template-columns:24px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dotted var(--edge);">
+                <div class="numeric" style="font-size:18px;color:var(--blue);font-weight:320;line-height:1;">03</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--ink);letter-spacing:-0.005em;line-height:1.25;">Human-AI Complementarity</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);font-weight:500;">4.8</div>
+              </div>
+              
+              <div style="display:grid;grid-template-columns:24px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dotted var(--edge);">
+                <div class="numeric" style="font-size:18px;color:var(--blue);font-weight:320;line-height:1;">04</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--ink);letter-spacing:-0.005em;line-height:1.25;">Strategic Relevance</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);font-weight:500;">3.5</div>
+              </div>
+              
+              <div style="display:grid;grid-template-columns:24px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dotted var(--edge);">
+                <div class="numeric" style="font-size:18px;color:var(--blue);font-weight:320;line-height:1;">05</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:var(--ink);letter-spacing:-0.005em;line-height:1.25;">Transferability</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);font-weight:500;">4.1</div>
+              </div>
+              
+              <div style="display:grid;grid-template-columns:24px 1fr auto;gap:12px;align-items:center;padding:12px 0 0;border-top:2px solid var(--ink);margin-top:4px;">
+                <div></div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--ink);font-weight:600;">TOTAL DURABILITY</div>
+                <div class="numeric" style="font-size:32px;color:var(--blue);font-weight:320;letter-spacing:-0.025em;line-height:1;">21.1</div>
+              </div>
+            </div>
+
+            <div style="margin-top:6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+              <div style="background:var(--forest-soft);border-left:3px solid var(--forest);padding:10px 12px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--forest);font-weight:600;">20</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11.5px;color:var(--ink);font-weight:500;margin-top:2px;line-height:1.25;">High durability · Invest aggressively</div>
+              </div>
+              <div style="background:var(--gold-soft);border-left:3px solid var(--gold);padding:10px 12px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--gold);font-weight:600;">13</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11.5px;color:var(--ink);font-weight:500;margin-top:2px;line-height:1.25;">Moderate · Augment with AI</div>
+              </div>
+              <div style="background:var(--vermillion-soft);border-left:3px solid var(--nusva-teal);padding:10px 12px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--nusva-teal);font-weight:600;">&lt; 13</div>
+                <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11.5px;color:var(--ink);font-weight:500;margin-top:2px;line-height:1.25;">Re-evaluate · Phase or redesign</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;Proof from the field (90 sec).&lt;/strong&gt; Three industries. Three before/after numbers. All three cases formalised in Organization Design for Real Decisions, Part IV.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FMCG (pricing decision):&lt;/strong&gt; 12 days to 4 days. Trigger ownership clarified, AI-augmented input, Decider authority codified. (Book 1, Ch. 13)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Banking (product cycle):&lt;/strong&gt; 16 weeks to 8 weeks. Spine redesign across product, risk, compliance forums. (Book 1, Ch. 14)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tech (CEO escalations):&lt;/strong&gt; 15 per day to 5 per day. Guardrails for distributed authority. VP threshold defined, escalation ladder codified. (Book 1, Ch. 15)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bridge:&lt;/strong&gt; &quot;Same diagnostic. Three different industries. Same direction of result.&quot;&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT FOUR · PROOF</span></div>
+      <div class="right"><span>12</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">12 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:30px;">
+          <h2 class="headline" style="margin-top:18px;max-width:920px;">
+            The diagnostic is universal. <em>The results follow.</em>
+          </h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;">
+          
+        <div style="display:flex;flex-direction:column;border:1.5px solid var(--ink);background:var(--paper);padding:24px 22px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--edge);padding-bottom:14px;margin-bottom:18px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--nusva-teal);font-weight:600;">FMCG</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--nusva-teal);font-weight:600;">−67%</div>
+          </div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;color:var(--slate);letter-spacing:0.01em;text-transform:uppercase;font-weight:500;margin-bottom:12px;">Pricing decision cycle</div>
+
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:end;margin-bottom:14px;">
+            <div style="text-align:center;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--slate);">BEFORE</div>
+              <div class="numeric" style="font-size:52px;color:var(--mist);font-weight:320;letter-spacing:-0.04em;line-height:0.9;text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:rgba(0,0,0,0.3);">12</div>
+            </div>
+            <div style="padding-bottom:14px;font-family:'IBM Plex Mono',monospace;color:var(--nusva-teal);font-size:18px;">→</div>
+            <div style="text-align:center;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--nusva-teal);">AFTER</div>
+              <div class="numeric" style="font-size:52px;color:var(--nusva-teal);font-weight:320;letter-spacing:-0.04em;line-height:0.9;">4</div>
+            </div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--slate);text-align:center;margin-bottom:14px;">DAYS</div>
+
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.5;color:var(--carbon);margin-top:auto;padding-top:14px;border-top:1px solid var(--edge);">
+            Decision Spine built in commercial function. Single Decider, codified margin guardrails.
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;border:1.5px solid var(--ink);background:var(--paper);padding:24px 22px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--edge);padding-bottom:14px;margin-bottom:18px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--blue);font-weight:600;">BANKING</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--blue);font-weight:600;">−50%</div>
+          </div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;color:var(--slate);letter-spacing:0.01em;text-transform:uppercase;font-weight:500;margin-bottom:12px;">Product change cycle</div>
+
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:end;margin-bottom:14px;">
+            <div style="text-align:center;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--slate);">BEFORE</div>
+              <div class="numeric" style="font-size:52px;color:var(--mist);font-weight:320;letter-spacing:-0.04em;line-height:0.9;text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:rgba(0,0,0,0.3);">16</div>
+            </div>
+            <div style="padding-bottom:14px;font-family:'IBM Plex Mono',monospace;color:var(--blue);font-size:18px;">→</div>
+            <div style="text-align:center;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--blue);">AFTER</div>
+              <div class="numeric" style="font-size:52px;color:var(--blue);font-weight:320;letter-spacing:-0.04em;line-height:0.9;">8</div>
+            </div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--slate);text-align:center;margin-bottom:14px;">WEEKS</div>
+
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.5;color:var(--carbon);margin-top:auto;padding-top:14px;border-top:1px solid var(--edge);">
+            Interface Contracting across 7 review forums. Decision Classification: fast-track vs full path.
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;border:1.5px solid var(--ink);background:var(--paper);padding:24px 22px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--edge);padding-bottom:14px;margin-bottom:18px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--forest);font-weight:600;">TECH</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--forest);font-weight:600;">−67%</div>
+          </div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;color:var(--slate);letter-spacing:0.01em;text-transform:uppercase;font-weight:500;margin-bottom:12px;">CEO escalations per day</div>
+
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:end;margin-bottom:14px;">
+            <div style="text-align:center;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--slate);">BEFORE</div>
+              <div class="numeric" style="font-size:52px;color:var(--mist);font-weight:320;letter-spacing:-0.04em;line-height:0.9;text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:rgba(0,0,0,0.3);">15</div>
+            </div>
+            <div style="padding-bottom:14px;font-family:'IBM Plex Mono',monospace;color:var(--forest);font-size:18px;">→</div>
+            <div style="text-align:center;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:var(--forest);">AFTER</div>
+              <div class="numeric" style="font-size:52px;color:var(--forest);font-weight:320;letter-spacing:-0.04em;line-height:0.9;">5</div>
+            </div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--slate);text-align:center;margin-bottom:14px;">ESCALATIONS</div>
+
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;line-height:1.5;color:var(--carbon);margin-top:auto;padding-top:14px;border-top:1px solid var(--edge);">
+            Guardrails for Distributed Authority. VPs have clear thresholds, escalation ladder defined.
+          </div>
+        </div>
+        
+        </div>
+
+        <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--edge);font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--slate);text-transform:uppercase;line-height:1.6;">
+          <div>Source · Three composite cases from Organization Design for Real Decisions, Part IV "Tiga Industri, Tiga Realitas" · FMCG Ch. 13 (p. 66), Banking Ch. 14 (p. 71), Tech Ch. 15 (p. 75) · Numbers measured 8 to 12 weeks post-intervention</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="slide" data-notes='&lt;p&gt;&lt;strong&gt;Make it actionable (90 sec).&lt;/strong&gt; Three phases. Ninety days. You leave today with a plan.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Days 1-30: MAP.&lt;/strong&gt; Audit your decision spine. Pick the three most expensive recurring decisions. For each, identify Trigger Owner, Forum, and Decider. Find the fuzzy ones.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Days 31-60: MEASURE.&lt;/strong&gt; Score your top 50 critical skills on the SDI. Identify the High Durability (invest), Moderate (augment), and Low (re-evaluate) tiers.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Days 61-90: REDESIGN.&lt;/strong&gt; Rebuild the worst spine. Reallocate capability spend per the SDI tiers. Layer AI on top, where the spine is now clean.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Close:&lt;/strong&gt; &quot;If you do nothing else from today, do this. The diagnostic is free. The structural change is the work.&quot;&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>ACT FOUR · ACTION</span></div>
+      <div class="right"><span>13</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">13 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="margin-bottom:24px;">
+          <h2 class="headline" style="margin-top:18px;max-width:920px;">
+            Three phases. Ninety days. <em>You leave today with the first one.</em>
+          </h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;">
+          
+        <div style="display:flex;flex-direction:column;background:var(--paper-warm);">
+          <div style="padding:20px 22px 16px;border-bottom:2px solid var(--ink);">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;">
+              <div class="numeric" style="font-size:38px;color:var(--ink);font-weight:280;letter-spacing:-0.03em;line-height:1;">01</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:600;">DAYS 1-30</div>
+            </div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:32px;color:var(--ink);letter-spacing:-0.02em;margin-top:8px;line-height:1;">MAP</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--carbon);font-style:italic;margin-top:6px;letter-spacing:-0.005em;">Audit the spine.</div>
+          </div>
+          <div style="padding:16px 22px 18px;flex:1;">
+            <ul style="list-style:none;padding:0;margin:0;"><li style="padding:10px 0;border-bottom:1px dotted var(--edge);">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14.5px;letter-spacing:-0.012em;color:var(--ink);line-height:1.2;">Pick three</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.45;color:var(--slate);margin-top:2px;">Three most expensive recurring decisions in the business.</div>
+            </li><li style="padding:10px 0;border-bottom:1px dotted var(--edge);">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14.5px;letter-spacing:-0.012em;color:var(--ink);line-height:1.2;">Trace each</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.45;color:var(--slate);margin-top:2px;">Map every decision through Trigger, Input, Forum, Decider, Exit.</div>
+            </li><li style="padding:10px 0;border-bottom:1px dotted var(--edge);">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14.5px;letter-spacing:-0.012em;color:var(--ink);line-height:1.2;">Flag the fuzz</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.45;color:var(--slate);margin-top:2px;">Find the unclear owners, the wrong forums, the missing exits.</div>
+            </li></ul>
+          </div>
+          <div style="padding:12px 22px 18px;background:var(--ink);color:var(--paper);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:var(--gold);font-weight:600;">DELIVERABLE</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;color:var(--paper);font-weight:500;margin-top:2px;letter-spacing:-0.005em;">Decision Spine Audit Report</div>
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;background:var(--paper-warm);">
+          <div style="padding:20px 22px 16px;border-bottom:2px solid var(--ink);">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;">
+              <div class="numeric" style="font-size:38px;color:var(--ink);font-weight:280;letter-spacing:-0.03em;line-height:1;">02</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:600;">DAYS 31-60</div>
+            </div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:32px;color:var(--ink);letter-spacing:-0.02em;margin-top:8px;line-height:1;">MEASURE</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--carbon);font-style:italic;margin-top:6px;letter-spacing:-0.005em;">Score the portfolio.</div>
+          </div>
+          <div style="padding:16px 22px 18px;flex:1;">
+            <ul style="list-style:none;padding:0;margin:0;"><li style="padding:10px 0;border-bottom:1px dotted var(--edge);">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14.5px;letter-spacing:-0.012em;color:var(--ink);line-height:1.2;">Top 50 skills</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.45;color:var(--slate);margin-top:2px;">Identify the 50 most strategic skills in the organisation.</div>
+            </li><li style="padding:10px 0;border-bottom:1px dotted var(--edge);">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14.5px;letter-spacing:-0.012em;color:var(--ink);line-height:1.2;">SDI each</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.45;color:var(--slate);margin-top:2px;">Score on five dimensions. Plot the distribution. Find the gaps.</div>
+            </li><li style="padding:10px 0;border-bottom:1px dotted var(--edge);">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14.5px;letter-spacing:-0.012em;color:var(--ink);line-height:1.2;">Tier the spend</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.45;color:var(--slate);margin-top:2px;">Allocate by tier: High invest, Moderate augment, Low re-evaluate.</div>
+            </li></ul>
+          </div>
+          <div style="padding:12px 22px 18px;background:var(--ink);color:var(--paper);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:var(--gold);font-weight:600;">DELIVERABLE</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;color:var(--paper);font-weight:500;margin-top:2px;letter-spacing:-0.005em;">Capability Portfolio Heatmap</div>
+          </div>
+        </div>
+        
+        <div style="display:flex;flex-direction:column;background:var(--paper-warm);">
+          <div style="padding:20px 22px 16px;border-bottom:2px solid var(--ink);">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;">
+              <div class="numeric" style="font-size:38px;color:var(--ink);font-weight:280;letter-spacing:-0.03em;line-height:1;">03</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--blue);font-weight:600;">DAYS 61-90</div>
+            </div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:32px;color:var(--ink);letter-spacing:-0.02em;margin-top:8px;line-height:1;">REDESIGN</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--carbon);font-style:italic;margin-top:6px;letter-spacing:-0.005em;">Rebuild and layer.</div>
+          </div>
+          <div style="padding:16px 22px 18px;flex:1;">
+            <ul style="list-style:none;padding:0;margin:0;"><li style="padding:10px 0;border-bottom:1px dotted var(--edge);">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14.5px;letter-spacing:-0.012em;color:var(--ink);line-height:1.2;">Worst spine first</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.45;color:var(--slate);margin-top:2px;">Rebuild the one decision flow with highest cost-of-stuck.</div>
+            </li><li style="padding:10px 0;border-bottom:1px dotted var(--edge);">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14.5px;letter-spacing:-0.012em;color:var(--ink);line-height:1.2;">Reallocate</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.45;color:var(--slate);margin-top:2px;">Move budget from declining to rising and emergent categories.</div>
+            </li><li style="padding:10px 0;border-bottom:1px dotted var(--edge);">
+              <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:14.5px;letter-spacing:-0.012em;color:var(--ink);line-height:1.2;">Then layer AI</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;line-height:1.45;color:var(--slate);margin-top:2px;">Now (and only now) plug AI into the cleaned spine.</div>
+            </li></ul>
+          </div>
+          <div style="padding:12px 22px 18px;background:var(--ink);color:var(--paper);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:var(--gold);font-weight:600;">DELIVERABLE</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;color:var(--paper);font-weight:500;margin-top:2px;letter-spacing:-0.005em;">90-Day Architecture Brief</div>
+          </div>
+        </div>
+        
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dark" data-notes='&lt;p&gt;&lt;strong&gt;Contributions close (60-90 sec).&lt;/strong&gt; Mirror the opening.&lt;/p&gt;
+&lt;p&gt;Four claims I am leaving you with today:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; The paradox is not about AI. It is about architecture.&lt;br&gt;
+&lt;strong&gt;2.&lt;/strong&gt; Thinking organisations run on two layers · Decision Spine and Capability Portfolio.&lt;br&gt;
+&lt;strong&gt;3.&lt;/strong&gt; AI is a multiplier between them. It does not replace either.&lt;br&gt;
+&lt;strong&gt;4.&lt;/strong&gt; The diagnostic is free. The structural change is the work.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resources:&lt;/strong&gt; Two books, both available. &lt;em&gt;Organisation Design for Real Decisions&lt;/em&gt; and &lt;em&gt;Skill-Based Organisation&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Contact:&lt;/strong&gt; ranggairawan.com / rangga@nusva.ai. Available for advisory engagements, board sessions, and capability audits.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Thank you.&lt;/strong&gt;&lt;/p&gt;'>
+      
+    <div class="meta-top">
+      <div class="left"><span class="section-tick"></span><span>CONTRIBUTIONS</span></div>
+      <div class="right"><span>14 / FIN</span></div>
+    </div>
+    <div class="meta-bottom">
+      <div class="left">The Thinking Organisation</div>
+      <div class="center mono">14 / 14</div>
+      <div class="right">ranggairawan.com</div>
+    </div>
+    
+      <div class="content">
+
+        <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:64px;height:calc(100% - 0px);align-items:start;">
+
+          <!-- LEFT: Four claims -->
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:var(--gold);font-weight:500;margin-bottom:14px;">
+              FOUR CLAIMS TO LEAVE WITH
+            </div>
+            <h2 class="headline" style="color:var(--ink);font-size:36px;line-height:1.05;margin-bottom:24px;max-width:520px;">
+              If you remember nothing else, <em style="color:var(--gold);">remember these four.</em>
+            </h2>
+
+            
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;padding:18px 0;border-bottom:1px solid rgba(10,61,98,0.12);">
+          <div class="numeric" style="font-size:42px;color:var(--gold);font-weight:280;letter-spacing:-0.04em;line-height:0.9;">01</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.18;color:var(--ink);letter-spacing:-0.018em;">The paradox is not about AI.</div>
+            <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:18px;line-height:1.25;color:var(--gold);letter-spacing:-0.012em;margin-top:4px;">It is about architecture.</div>
+          </div>
+        </div>
+        
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;padding:18px 0;border-bottom:1px solid rgba(10,61,98,0.12);">
+          <div class="numeric" style="font-size:42px;color:var(--gold);font-weight:280;letter-spacing:-0.04em;line-height:0.9;">02</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.18;color:var(--ink);letter-spacing:-0.018em;">Thinking organisations run on two layers.</div>
+            <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:18px;line-height:1.25;color:var(--gold);letter-spacing:-0.012em;margin-top:4px;">Decision Spine and Capability Portfolio.</div>
+          </div>
+        </div>
+        
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;padding:18px 0;border-bottom:1px solid rgba(10,61,98,0.12);">
+          <div class="numeric" style="font-size:42px;color:var(--gold);font-weight:280;letter-spacing:-0.04em;line-height:0.9;">03</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.18;color:var(--ink);letter-spacing:-0.018em;">AI is the multiplier between them.</div>
+            <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:18px;line-height:1.25;color:var(--gold);letter-spacing:-0.012em;margin-top:4px;">It does not replace either.</div>
+          </div>
+        </div>
+        
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:24px;padding:18px 0;border-bottom:1px solid rgba(10,61,98,0.12);">
+          <div class="numeric" style="font-size:42px;color:var(--gold);font-weight:280;letter-spacing:-0.04em;line-height:0.9;">04</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.18;color:var(--ink);letter-spacing:-0.018em;">The diagnostic is free.</div>
+            <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:380;font-size:18px;line-height:1.25;color:var(--gold);letter-spacing:-0.012em;margin-top:4px;">The structural change is the work.</div>
+          </div>
+        </div>
+        
+          </div>
+
+          <!-- RIGHT: Resources + contact -->
+          <div style="display:flex;flex-direction:column;gap:28px;">
+
+            <!-- Books -->
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--mist);font-weight:500;margin-bottom:14px;">
+                THE TWO BOOKS BEHIND THIS TALK
+              </div>
+              <div style="display:flex;flex-direction:column;gap:14px;">
+                <div style="border-left:2px solid var(--gold);padding-left:14px;">
+                  <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:400;font-size:18px;color:var(--ink);letter-spacing:-0.015em;line-height:1.15;">Organization Design for Real Decisions</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--mist);margin-top:4px;">DECISION SPINE · 105 PP · 5 PARTS · 19 CHAPTERS · 2026</div>
+                </div>
+                <div style="border-left:2px solid var(--gold);padding-left:14px;">
+                  <div style="font-family:'Outfit',sans-serif;font-style:italic;font-weight:400;font-size:18px;color:var(--ink);letter-spacing:-0.015em;line-height:1.15;">Skill-Based Organization</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--mist);margin-top:4px;">CAPABILITY PORTFOLIO · 195 PP · 4 BAGIAN · 14 CHAPTERS · 2026</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact -->
+            <div style="background:var(--paper);color:var(--ink);padding:24px 22px;margin-top:auto;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--blue);font-weight:600;margin-bottom:14px;">CONTINUE THE CONVERSATION</div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:380;font-size:20px;letter-spacing:-0.018em;line-height:1.15;color:var(--ink);margin-bottom:14px;">Rangga Irawan Prasetyo, MBA</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink);letter-spacing:0.04em;line-height:1.7;">
+                <div>→ <strong>ranggairawan.com</strong></div>
+                <div>→ rangga@nusva.ai</div>
+                <div>→ Founder, Nusva Group · Bandung, ID</div>
+              </div>
+              <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--edge);font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:var(--slate);font-style:italic;line-height:1.4;">
+                Advisory engagements · Capability audits · Board sessions · Architecture briefs
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+
+  <!-- Nav Controls: bottom-right -->
+  <nav class="nav-controls">
+    <button data-action="prev">◂ Prev</button>
+    <span class="counter mono">01 / 14</span>
+    <button data-action="next">Next ▸</button>
+  </nav>
+
+  <!-- Mode Controls: top-right -->
+  <nav class="mode-controls">
+    <button data-action="fullscreen">⛶ Presentation</button>
+    <button data-action="esc-fs">✕ Exit</button>
+    <button data-action="print">⬇ PDF</button>
+  </nav>
+
+
+</div>
+
+<script>
+(function() {
+  const deck = document.querySelector('.deck');
+  const stage = document.querySelector('.stage');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+
+  const $counter = document.querySelector('.counter');
+  const $prev = document.querySelector('[data-action="prev"]');
+  const $next = document.querySelector('[data-action="next"]');
+  const $fullscreen = document.querySelector('[data-action="fullscreen"]');
+  const $escFs = document.querySelector('[data-action="esc-fs"]');
+  const $print = document.querySelector('[data-action="print"]');
+
+  function show(idx) {
+    idx = Math.max(0, Math.min(total - 1, idx));
+    slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    current = idx;
+    $counter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+  }
+
+  // === SCALING ===
+  function scaleStage() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const sw = 1280;
+    const sh = 720;
+    const sx = vw / sw;
+    const sy = vh / sh;
+    const s = Math.min(sx, sy) * 0.94;
+    stage.style.transform = `scale(${s})`;
+  }
+  scaleStage();
+  window.addEventListener('resize', scaleStage);
+
+  // === AUTO-FADE CONTROLS ===
+  const navCtrl = document.querySelector('.nav-controls');
+  const modeCtrl = document.querySelector('.mode-controls');
+  let fadeTimer;
+  function showControls() {
+    navCtrl?.classList.add('visible');
+    modeCtrl?.classList.add('visible');
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => {
+      navCtrl?.classList.remove('visible');
+      modeCtrl?.classList.remove('visible');
+    }, 2800);
+  }
+  document.addEventListener('mousemove', showControls);
+  document.addEventListener('keydown', showControls);
+
+  // === NAV ===
+  $prev?.addEventListener('click', () => show(current - 1));
+  $next?.addEventListener('click', () => show(current + 1));
+
+  // === FULLSCREEN ===
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.();
+    } else {
+      document.exitFullscreen?.();
+    }
+  }
+  $fullscreen?.addEventListener('click', toggleFullscreen);
+  $escFs?.addEventListener('click', () => document.exitFullscreen?.());
+
+  // === PDF EXPORT ===
+  $print?.addEventListener('click', () => {
+    const tip = document.createElement('div');
+    tip.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#0A3D62;color:#fff;padding:22px 36px;border-radius:8px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.1em;text-align:center;z-index:99999;line-height:2;box-shadow:0 8px 48px rgba(0,0,0,0.35);';
+    tip.innerHTML = 'PDF EXPORT<br><span style="font-size:9px;opacity:0.7;">Orientation: Landscape · Margins: None<br>Background graphics: ON · Scale: 100%</span>';
+    document.body.appendChild(tip);
+    setTimeout(() => { tip.remove(); window.print(); }, 1800);
+  });
+
+  // === KEYBOARD ===
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault(); show(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault(); show(current - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault(); show(0);
+    } else if (e.key === 'End') {
+      e.preventDefault(); show(total - 1);
+    } else if (e.key === 'f' || e.key === 'F') {
+      e.preventDefault(); toggleFullscreen();
+    } else if (e.key === 'Escape') {
+      document.exitFullscreen?.();
+    } else if (e.key >= '1' && e.key <= '9') {
+      const n = parseInt(e.key) - 1;
+      if (n < total) show(n);
+    }
+  });
+
+
+  document.querySelector('[data-timer="reset"]')?.addEventListener('click', () => { elapsed = 0; if ($time) $time.textContent = '00:00'; });
+
+  // === LOGIN GATE ===
+  (function() {
+    const gate = document.getElementById('gate');
+    const userInput = document.getElementById('gate-user');
+    const passInput = document.getElementById('gate-pass');
+    const submitBtn = document.getElementById('gate-submit');
+    const errMsg = document.getElementById('gate-err');
+    const CREDS = { user: 'peoplehr', pass: 'Webinar!8' };
+
+    function attempt() {
+      const u = userInput.value.trim();
+      const p = passInput.value;
+      if (u === CREDS.user && p === CREDS.pass) {
+        errMsg.classList.remove('show');
+        gate.classList.add('hidden');
+        setTimeout(() => { gate.style.display = 'none'; }, 520);
+        userInput.blur();
+        passInput.blur();
+      } else {
+        errMsg.classList.add('show');
+        passInput.value = '';
+        passInput.focus();
+        gate.querySelector('.gate-card').animate(
+          [{ transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(-4px)' }, { transform: 'translateX(0)' }],
+          { duration: 280, easing: 'ease-out' }
+        );
+      }
+    }
+
+    submitBtn.addEventListener('click', attempt);
+    [userInput, passInput].forEach(el => {
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter') attempt(); });
+    });
+    userInput.focus();
+  })();
+
+  // Init
+  show(0);
+  showControls();
+})();
+</script>
+</body>
+</html>
